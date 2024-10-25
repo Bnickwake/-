@@ -1,3 +1,5 @@
+Шалыгин Никита ФПэ-01-22
+
 import iapws
 import matplotlib.pyplot as plt
 import numpy as np
