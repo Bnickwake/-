@@ -26,8 +26,16 @@ def kpd(PO,TO,PK):
         full_energy = point_0.h - point_pump_outlet.h
         kpd_value = (useful_energy / full_energy) * 100
         return kpd_value
-# функция kpd вычисляет значение термического кпд используя параметры p0, t0 и pk
 
+#функция строит график зависимости термического КПД от параметров dРО,dТО,РК
+def kpd(PO,TO,PK):
+        point_0 = gas(P = PO * unit, T = (TO + 273.15))
+        point_condenser_inlet = gas(P = (PK * unit) , s = point_0.s)
+        point_pump_outlet = gas(P = (PK * unit), x = 0)
+        useful_energy = point_0.h - point_condenser_inlet.h
+        full_energy = point_0.h - point_pump_outlet.h
+        kpd_value = (useful_energy / full_energy) * 100
+        return kpd_value
 
 #функция строит график зависимости термического КПД от параметров dРО,dТО,РК
 def graf_term_kpd(PO,TO,PK):
@@ -45,11 +53,11 @@ def graf_term_kpd(PO,TO,PK):
     # Определяем путь к рабочему столу
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
 
-    # Определяем путь к папке "графики Шалыгин", так называется моя папка с графиками
-    folder_name = "графики Шалыгин"
+    # Определяем путь к папке "в гитхаб", так называется моя папка с графиками
+    folder_name = "в гитхаб"
     folder_path = os.path.join(desktop_path, folder_name)
 
-    # Проверяем, существует ли папка "графики Шалыгин"
+    # Проверяем, существует ли папка "в гитхаб"
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
 
@@ -60,10 +68,12 @@ def graf_term_kpd(PO,TO,PK):
     plt.savefig(file_path)
     return plt.show()
 
-#дано
-p0 = np.array([5 * MPa, 10 * MPa, 15 * MPa, 20 * MPa]) # Мега Паскаль
-t0 = np.array([300, 350, 400, 450 ,500]) # Градус Цельсия
-pk = 5 * kPa
+if __name__ == "__main__":
+    #дано
+    p0 = np.array([5 * MPa, 10 * MPa, 15 * MPa, 20 * MPa]) # Мега Паскаль
+    t0 = np.array([300, 350, 400, 450 ,500]) # Градус Цельсия
+    pk = 5 * kPa
+
 
 #построение графика используя функцию
 grafik1 = graf_term_kpd(p0,t0,pk)
@@ -105,11 +115,12 @@ def graf_pk(PO,TO,PK):
     plt.savefig(file_path)
     return plt.show()
 
+if __name__ == "__main__":
 # Значение давления и темпратуры
-p0 = 5 * MPa  #мега паскаль
-t0 = 450 #градусы цельсия
-pk = np.array([5 * kPa, 10 * kPa, 15 * kPa, 20 * kPa, 50 * kPa]) # Кило Паскаль
-
+    p0 = 5 * MPa  #мега паскаль
+    t0 = 450 #градусы цельсия
+    pk = np.array([5 * kPa, 10 * kPa, 15 * kPa, 20 * kPa, 50 * kPa]) # Кило Паскаль
+  
 #построение графика используя функцию
 graf22 = graf_pk(p0,t0,pk)
 
